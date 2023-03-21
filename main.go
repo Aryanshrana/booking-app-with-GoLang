@@ -28,7 +28,9 @@ func main() {
 	//array in go -assign value at declaration
 	//var bookings = [50]string{"Aryansh","Shubh","Henry","Peter"}
 	//declaring first assigning after
-	var bookings [50]string
+	//var bookings [50]string - > array
+	// slices --> it is more dynamic
+	var bookings []string
 	//asking user input
 	fmt.Println("enter your first name: ")
 	fmt.Scan(&firstName)
@@ -43,11 +45,12 @@ func main() {
 	fmt.Scan(&userTicket)
 
 	RemainingTickets = RemainingTickets - userTicket
-	bookings[0] = firstName + " " + lastName
+	//bookings[0] = firstName + " " + lastName
+	bookings = append(bookings, firstName+" "+lastName)
 
 	fmt.Printf("Persons who booked: %v\n", bookings)
 	//printing length of array
-	fmt.Printf("length of array- %v\n", len(bookings))
+	fmt.Printf("length of slice- %v\n", len(bookings))
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will recieve notifications regarding conference on you email %v\n", firstName, lastName, userTicket, email)
 	fmt.Printf("now %v tickets remaining for %v", RemainingTickets, ConferenceName)
