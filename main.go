@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	var ConferenceName = "Go Conference"
@@ -53,11 +56,18 @@ func main() {
 		fmt.Printf("Thank you %v %v for booking %v tickets. You will recieve notifications regarding conference on you email %v\n", firstName, lastName, userTicket, email)
 		fmt.Printf("now %v tickets remaining for %v\n", RemainingTickets, ConferenceName)
 
-		fmt.Printf("Persons who booked: %v\n", bookings)
 		//printing length of array
-		fmt.Printf("length of slice- %v\n", len(bookings))
+		//fmt.Printf("Length of slice- %v\n", len(bookings))
+		firstnames := []string{}
+		for _, booking := range bookings {
+			// it expect two values from bookings , so we have to use two variables to coolece thos values but we are not using first value that is index , so instead of using index we can use underscore
+			// _ are used to represent those values which we don't want to use
+			var names = strings.Fields(booking)
 
-		fmt.Printf("here is the all bookings %v\n", bookings)
+			firstnames = append(firstnames, names[0])
+		}
+
+		fmt.Printf("The firstnames of all the persons who booked a ticket %v\n", firstnames)
 
 	}
 
