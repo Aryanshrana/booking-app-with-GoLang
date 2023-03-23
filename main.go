@@ -19,7 +19,6 @@ func main() {
 	fmt.Printf("Welcome User, to %v booking application\n", ConferenceName)
 	fmt.Printf("total tickets are %v and remainig tickets are %v\n", ConferenceTickets, RemainingTickets)
 	fmt.Println("Book your tickets here")
-
 	//asking user name when not assiging a value to variable at the time of declaration you have to explicitly tell go the datatype like below
 	var firstName string
 	var lastName string
@@ -31,28 +30,35 @@ func main() {
 	//var bookings [50]string - > array
 	// slices --> it is more dynamic
 	var bookings []string
-	//asking user input
-	fmt.Println("enter your first name: ")
-	fmt.Scan(&firstName)
 
-	fmt.Println("enter your last name: ")
-	fmt.Scan(&lastName)
+	for {
 
-	fmt.Println("enter your email address: ")
-	fmt.Scan(&email)
+		//asking user input
+		fmt.Println("enter your first name: ")
+		fmt.Scan(&firstName)
 
-	fmt.Println("enter number of tickets: ")
-	fmt.Scan(&userTicket)
+		fmt.Println("enter your last name: ")
+		fmt.Scan(&lastName)
 
-	RemainingTickets = RemainingTickets - userTicket
-	//bookings[0] = firstName + " " + lastName
-	bookings = append(bookings, firstName+" "+lastName)
+		fmt.Println("enter your email address: ")
+		fmt.Scan(&email)
 
-	fmt.Printf("Persons who booked: %v\n", bookings)
-	//printing length of array
-	fmt.Printf("length of slice- %v\n", len(bookings))
+		fmt.Println("enter number of tickets: ")
+		fmt.Scan(&userTicket)
 
-	fmt.Printf("Thank you %v %v for booking %v tickets. You will recieve notifications regarding conference on you email %v\n", firstName, lastName, userTicket, email)
-	fmt.Printf("now %v tickets remaining for %v", RemainingTickets, ConferenceName)
+		RemainingTickets = RemainingTickets - userTicket
+		//bookings[0] = firstName + " " + lastName
+		bookings = append(bookings, ","+firstName+" "+lastName)
+
+		fmt.Printf("Thank you %v %v for booking %v tickets. You will recieve notifications regarding conference on you email %v\n", firstName, lastName, userTicket, email)
+		fmt.Printf("now %v tickets remaining for %v\n", RemainingTickets, ConferenceName)
+
+		fmt.Printf("Persons who booked: %v\n", bookings)
+		//printing length of array
+		fmt.Printf("length of slice- %v\n", len(bookings))
+
+		fmt.Printf("here is the all bookings %v\n", bookings)
+
+	}
 
 }
