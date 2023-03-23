@@ -36,6 +36,11 @@ func main() {
 
 	for {
 
+		if RemainingTickets == 0 {
+			fmt.Println("All tickets are booked, you are late")
+			break
+		}
+
 		//asking user input
 		fmt.Println("enter your first name: ")
 		fmt.Scan(&firstName)
@@ -48,6 +53,11 @@ func main() {
 
 		fmt.Println("enter number of tickets: ")
 		fmt.Scan(&userTicket)
+
+		if userTicket > RemainingTickets {
+			fmt.Printf("Sorry we have only %v tickets available, you can not book %v tickets so book only in range\n", RemainingTickets, userTicket)
+			continue
+		}
 
 		RemainingTickets = RemainingTickets - userTicket
 		//bookings[0] = firstName + " " + lastName
