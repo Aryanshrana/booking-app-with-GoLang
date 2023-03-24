@@ -5,11 +5,13 @@ import (
 	"strings"
 )
 
+const ConferenceTickets = 50
+
+var ConferenceName = "Go Conference"
+var RemainingTickets uint = 50
+var bookings = []string{}
+
 func main() {
-	var ConferenceName = "Go Conference"
-	const ConferenceTickets = 50
-	var RemainingTickets uint = 50
-	bookings := []string{}
 
 	//alternative way of declaring a variable and assigning a variable to it
 	//with this you can not declare constants
@@ -19,7 +21,7 @@ func main() {
 
 	//printing the datatype of variable
 	//fmt.Printf("ConferenceTickets is %T and ConferenceName is %T\n", ConferenceTickets, ConferenceName)
-	greetUser(ConferenceName, ConferenceTickets, RemainingTickets)
+	greetUser()
 
 	//asking user name when not assiging a value to variable at the time of declaration you have to explicitly tell go the datatype like below
 
@@ -39,13 +41,13 @@ func main() {
 		firstName, lastName, email, userTicket := getUserInput()
 
 		//checking user validation
-		isvalidName, isvalidEmail, isvalidTickets := validateUserInput(firstName, lastName, email, userTicket, RemainingTickets)
+		isvalidName, isvalidEmail, isvalidTickets := validateUserInput(firstName, lastName, email, userTicket)
 
 		if isvalidName && isvalidEmail && isvalidTickets {
 			//bookTickets
-			bookTickets(RemainingTickets, userTicket, bookings, firstName, lastName, email, ConferenceName)
+			bookTickets(userTicket, firstName, lastName, email)
 
-			firstnames := getfirstnames(bookings)
+			firstnames := getfirstnames()
 			fmt.Printf("The firstnames of all the persons who booked a ticket %v\n", firstnames)
 
 		} else {
@@ -66,13 +68,13 @@ func main() {
 
 }
 
-func greetUser(ConferenceName string, ConferenceTickets int, RemainingTickets uint) {
+func greetUser() {
 	fmt.Printf("Welcome User, to %v booking application\n", ConferenceName)
 	fmt.Printf("total tickets are %v and remainig tickets are %v\n", ConferenceTickets, RemainingTickets)
 	fmt.Println("Book your tickets here to attend")
 }
 
-func getfirstnames(bookings []string) []string {
+func getfirstnames() []string {
 	firstnames := []string{}
 	for _, booking := range bookings {
 		// it expect two values from bookings , so we have to use two variables to coolece thos values but we are not using first value that is index , so instead of using index we can use underscore
@@ -83,7 +85,7 @@ func getfirstnames(bookings []string) []string {
 	return firstnames
 }
 
-func validateUserInput(firstName string, lastName string, email string, userTicket uint, RemainingTickets uint) (bool, bool, bool) {
+func validateUserInput(firstName string, lastName string, email string, userTicket uint) (bool, bool, bool) {
 	isvalidName := len(firstName) >= 2 && len(lastName) >= 2
 	isvalidEmail := strings.Contains(email, "@")
 	isvalidTickets := userTicket > 0 && userTicket <= RemainingTickets
@@ -116,7 +118,7 @@ func getUserInput() (string, string, string, uint) {
 
 }
 
-func bookTickets(RemainingTickets uint, userTicket uint, bookings []string, firstName string, lastName string, email string, ConferenceName string) {
+func bookTickets(userTicket uint, firstName string, lastName string, email string) {
 	RemainingTickets = RemainingTickets - userTicket
 	//bookings[0] = firstName + " " + lastName
 	bookings = append(bookings, ","+firstName+" "+lastName)
